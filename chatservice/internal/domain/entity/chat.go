@@ -14,7 +14,7 @@ type ChatConfig struct {
 	Stop             []string
 	MaxTokens        int
 	PresencePenalty  float32
-	FrequencePenalty float32
+	FrequencyPenalty float32
 }
 
 type Chat struct {
@@ -24,7 +24,7 @@ type Chat struct {
 	Messages             []*Message
 	ErasedMessages       []*Message
 	Status               string
-	TokenUsege           int
+	TokenUsage           int
 	Config               *ChatConfig
 }
 
@@ -35,7 +35,7 @@ func NewChat(userId string, initialSystemMessage *Message, chatConfig *ChatConfi
 		InitialSystemMessage: initialSystemMessage,
 		Status:               "active",
 		Config:               chatConfig,
-		TokenUsege:           0,
+		TokenUsage:           0,
 	}
 	chat.AddMessage(initialSystemMessage)
 
@@ -47,7 +47,7 @@ func NewChat(userId string, initialSystemMessage *Message, chatConfig *ChatConfi
 
 func (c *Chat) Validate() error {
 	if c.UserID == "" {
-		return errors.New("New id is empty")
+		return errors.New("user id is empty")
 	}
 	if c.Status != "active" && c.Status != "ended" {
 		return errors.New("invalid status")
@@ -55,8 +55,7 @@ func (c *Chat) Validate() error {
 	if c.Config.Temperature < 0 || c.Config.Temperature > 2 {
 		return errors.New("invalid temperature")
 	}
-
-	// ...more validation for config
+	// ... more validations for config
 	return nil
 }
 
@@ -65,7 +64,7 @@ func (c *Chat) AddMessage(m *Message) error {
 		return errors.New("chat is ended. no more messages allowed")
 	}
 	for {
-		if c.Config.Model.GetMaxTokens() >= m.GetQtdTokens()+c.TokenUsege {
+		if c.Config.Model.GetMaxTokens() >= m.GetQtdTokens()+c.TokenUsage {
 			c.Messages = append(c.Messages, m)
 			c.RefreshTokenUsage()
 			break
@@ -89,9 +88,9 @@ func (c *Chat) End() {
 }
 
 func (c *Chat) RefreshTokenUsage() {
-	c.TokenUsege = 0
+	c.TokenUsage = 0
 	for m := range c.Messages {
-		c.TokenUsege += c.Messages[m].GetQtdTokens()
+		c.TokenUsage += c.Messages[m].GetQtdTokens()
 
 	}
 }
