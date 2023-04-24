@@ -4,15 +4,15 @@ import (
 	"database/sql"
 	"fmt"
 
+	"github.com/devfullcycle/fclx/chatservice/configs"
+	"github.com/devfullcycle/fclx/chatservice/internal/infra/grpc/server"
+	"github.com/devfullcycle/fclx/chatservice/internal/infra/repository"
+	"github.com/devfullcycle/fclx/chatservice/internal/infra/web"
+	"github.com/devfullcycle/fclx/chatservice/internal/infra/web/webserver"
+	"github.com/devfullcycle/fclx/chatservice/internal/usecase/chatcompletion"
+	"github.com/devfullcycle/fclx/chatservice/internal/usecase/chatcompletionstream"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/sashabaranov/go-openai"
-	"github.com/yrllanio/fclx/chatservice/configs"
-	"github.com/yrllanio/fclx/chatservice/internal/infra/grpc/server"
-	"github.com/yrllanio/fclx/chatservice/internal/infra/repository"
-	"github.com/yrllanio/fclx/chatservice/internal/infra/web"
-	"github.com/yrllanio/fclx/chatservice/internal/infra/web/webserver"
-	"github.com/yrllanio/fclx/chatservice/internal/usecase/chatcompletion"
-	"github.com/yrllanio/fclx/chatservice/internal/usecase/chatcompletionstream"
 )
 
 func main() {

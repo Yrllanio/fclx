@@ -6,9 +6,9 @@ import (
 	"io"
 	"strings"
 
+	"github.com/devfullcycle/fclx/chatservice/internal/domain/entity"
+	"github.com/devfullcycle/fclx/chatservice/internal/domain/gateway"
 	openai "github.com/sashabaranov/go-openai"
-	"github.com/yrllanio/fclx/chatservice/internal/domain/entity"
-	"github.com/yrllanio/fclx/chatservice/internal/domain/gateway"
 )
 
 type ChatCompletionConfigInputDTO struct {

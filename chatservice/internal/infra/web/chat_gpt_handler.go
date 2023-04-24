@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/yrllanio/fclx/chatservice/internal/usecase/chatcompletion"
+	"github.com/devfullcycle/fclx/chatservice/internal/usecase/chatcompletion"
 )
 
 type WebChatGPTHandler struct {
